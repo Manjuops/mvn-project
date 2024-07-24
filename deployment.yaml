@@ -15,7 +15,7 @@ spec:
         app: mysql
     spec:
       containers:
-        - name: mvncontainer
+        - name: mvncontainer2
           image: mymvn:latest
           ports:
             - containerPort: 8080
