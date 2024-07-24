@@ -17,6 +17,7 @@ spec:
       containers:
         - name: mvncontainer2
           image: mymvn:latest
+          imagePullPolicy: IfNotPresent 
           ports:
             - containerPort: 8080
           env:
