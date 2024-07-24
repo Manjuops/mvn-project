@@ -1,0 +1,67 @@
+apiVersion:apps/V1
+kind: Deployment
+metadata: 
+   name:mysql
+   labels:
+      app:mysql
+ spec:
+     replicas:1
+     selector:
+         matchLabels:
+              app: mysql
+    template:
+         metadata:
+              labels:
+                 app:mysql
+   spec:
+     container:
+       -name: mvncontainer
+        image: mymvn
+        ports:
+- containerPort:8080
+
+ENV:
+-name: MYSQL_PASSWORD
+ value:opstree123
+-name: MYSQL_DATABASE
+ value: springbootdb
+-name:MYSQL_USER
+value: opstree
+volumeMounts:
+
+-name:mysql-persistent-storage
+  mount-path:/var/lib/mysql
+
+volumes:
+-name:mysqlpersistent-storage
+  persistentVolumeClaim:
+     claimName: mysql-pvc
+---
+apiVersion:v1
+kind:Service
+metadata:
+     name:mysql
+     labels:
+        app: mysql
+spec:
+     ports:
+      -port:8080
+        targetPort :8080
+      nodePort: 30036
+     selector:
+      app:mysql
+type: NodePort
+
+----
+apiVersion:v1
+kind: PersistentVolumeClaim
+metadata:
+       name: mysql-pvc
+       labels:
+          app: mysql
+spec:
+ accessModes:
+- ReadWriteOnce
+resources:
+  requests:
+     storage: 1Gi
