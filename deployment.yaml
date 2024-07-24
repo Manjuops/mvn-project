@@ -15,7 +15,7 @@ spec:
         app: mysql
     spec:
       containers:
-        - name: mvncontainer2
+        - name: mysql-container
           image: mymvn:latest
           imagePullPolicy: IfNotPresent 
           ports:
@@ -43,8 +43,8 @@ metadata:
     app: mysql
 spec:
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 3306
+      targetPort: 3306
       nodePort: 30036
   selector:
     app: mysql
