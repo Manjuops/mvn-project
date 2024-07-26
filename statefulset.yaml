@@ -111,10 +111,11 @@ metadata:
   labels:
     app: maven-app
 spec:
+  type: NodePort
+  selector:
+    app: maven-app
   ports:
     - port: 8080
       targetPort: 8080
-  selector:
-    app: maven-app
-  type: NodePort
-  nodePort: 30090
+      nodePort: 30080
+  
