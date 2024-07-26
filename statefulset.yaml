@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: db
-          image: mrepo/db:latest  
+          image: db:latest  
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3306
@@ -87,7 +87,7 @@ spec:
     spec:
       containers:
         - name: mymvn
-          image: mrepo/mymvn:latest  
+          image: mymvn:latest  
           ports:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent
