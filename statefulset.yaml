@@ -39,7 +39,7 @@ spec:
           persistentVolumeClaim:
             claimName: mysql-pvc
       imagePullSecrets:
-        - name: secret/1bb4fb1f-395d-4fe5-8325-661d2eb5f830
+        - name: secret/1bb4fb1f-395d-4fe5-8325-661d2eb5f830  # Corrected placement
 
 ---
 apiVersion: v1
@@ -104,8 +104,8 @@ spec:
               value: opstree123
             - name: DB_NAME
               value: springbootdb
-          imagePullSecrets:
-            - name: secret/1bb4fb1f-395d-4fe5-8325-661d2eb5f830
+      imagePullSecrets:
+        - name: secret/1bb4fb1f-395d-4fe5-8325-661d2eb5f830  # Corrected placement
 
 ---
 apiVersion: v1
