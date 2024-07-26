@@ -117,4 +117,4 @@ spec:
   selector:
     app: maven-app
   type: NodePort
-  nodePort: 30080
+  nodePort: 30090
