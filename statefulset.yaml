@@ -107,10 +107,9 @@ metadata:
   labels:
     app: maven-app
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: maven-app
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 30080
