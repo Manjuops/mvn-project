@@ -107,9 +107,10 @@ metadata:
   labels:
     app: maven-app
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: maven-app
   ports:
     - port: 8080
       targetPort: 8080
+
