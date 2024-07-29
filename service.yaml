@@ -3,19 +3,19 @@ kind: Service
 metadata:
   name: nginx-ingress-controller
   namespace: default
-  annotations:
-    service.beta.kubernetes.io/azure-load-balancer-internal: "true"  # Optional, if using internal load balancer
 spec:
-  type: LoadBalancer
-  loadBalancerIP: 20.220.18.229
+  type: NodePort
   ports:
     - name: http
       port: 80
       targetPort: 80
       protocol: TCP
-    - name : https 
+      nodePort: 30080
+    - name: https
       port: 443
       targetPort: 443
       protocol: TCP
+      nodePort: 30443
   selector:
     app: nginx-ingress
+
