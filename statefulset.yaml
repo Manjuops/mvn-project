@@ -37,7 +37,7 @@ spec:
           persistentVolumeClaim:
             claimName: mysql-pvc
       imagePullSecrets:
-        - name: 1bb4fb1f-395d-4fe5-8325-661d2eb5f830  
+        - name: azurereposecret  
 
 ---
 apiVersion: v1
@@ -103,7 +103,7 @@ spec:
             - name: DB_NAME
               value: springbootdb
       imagePullSecrets:
-        - name: 1bb4fb1f-395d-4fe5-8325-661d2eb5f830  
+        - name: azurereposecret
 
 ---
 apiVersion: v1
