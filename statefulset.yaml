@@ -29,13 +29,7 @@ spec:
               value: opstree
             - name: MYSQL_PASSWORD
               value: opstree123
-          volumeMounts:
-            - name: mysql-persistent-storage
-              mountPath: /var/lib/mysql
-      volumes:
-        - name: mysql-persistent-storage
-          persistentVolumeClaim:
-            claimName: mysql-pvc
+          
       imagePullSecrets:
         - name: azurereposecret  
 
