@@ -37,7 +37,7 @@ spec:
               cpu: 500m    # Limit to 500m CPU
               memory: 1Gi  # Limit to 1Gi memory
       imagePullSecrets:
-        - name: azurereposecret  
+        - name: my-secret 
 
 ---
 apiVersion: v1
@@ -109,7 +109,7 @@ spec:
               cpu: 200m    
               memory: 512Mi  
       imagePullSecrets:
-        - name: azurereposecret
+        - name: my-secret
 
 ---
 apiVersion: v1
