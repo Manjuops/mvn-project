@@ -31,13 +31,13 @@ spec:
               value: opstree123
           resources:
             requests:
-              cpu: 250m    # Request 250m CPU
-              memory: 512Mi  # Request 512Mi memory
+              cpu: 250m
+              memory: 512Mi
             limits:
-              cpu: 500m    # Limit to 500m CPU
-              memory: 1Gi  # Limit to 1Gi memory
+              cpu: 500m
+              memory: 1Gi
       imagePullSecrets:
-        - name: msecret 
+        - name: msecret
 
 ---
 apiVersion: v1
@@ -67,6 +67,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -94,7 +95,7 @@ spec:
             - name: DB_HOST
               value: mysql-db
             - name: DB_PORT
-              value: 3306
+              value: "3306"
             - name: DB_USER
               value: opstree
             - name: DB_PASSWORD
@@ -103,11 +104,11 @@ spec:
               value: springbootdb
           resources:
             requests:
-              cpu: 100m    
-              memory: 256Mi  
+              cpu: 100m
+              memory: 256Mi
             limits:
-              cpu: 200m    
-              memory: 512Mi  
+              cpu: 200m
+              memory: 512Mi
       imagePullSecrets:
         - name: msecret
 
