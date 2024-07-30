@@ -29,7 +29,13 @@ spec:
               value: opstree
             - name: MYSQL_PASSWORD
               value: opstree123
-          
+          resources:
+            requests:
+              cpu: 250m    # Request 250m CPU
+              memory: 512Mi  # Request 512Mi memory
+            limits:
+              cpu: 500m    # Limit to 500m CPU
+              memory: 1Gi  # Limit to 1Gi memory
       imagePullSecrets:
         - name: azurereposecret  
 
@@ -61,7 +67,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -96,6 +101,13 @@ spec:
               value: opstree123
             - name: DB_NAME
               value: springbootdb
+          resources:
+            requests:
+              cpu: 100m    
+              memory: 256Mi  
+            limits:
+              cpu: 200m    
+              memory: 512Mi  
       imagePullSecrets:
         - name: azurereposecret
 
@@ -113,6 +125,4 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 30081  # Optional: Specify a node port, range is 30000-32767
-
-
+      nodePort: 30081  
