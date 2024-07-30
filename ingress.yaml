@@ -1,12 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: default-backend-ingress
+  name: maven-app-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
-    - http:
+    - host: maven-app.example.com
+      http:
         paths:
           - path: /
             pathType: Prefix
