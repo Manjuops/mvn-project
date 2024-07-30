@@ -94,7 +94,7 @@ spec:
             - name: DB_HOST
               value: mysql-db
             - name: DB_PORT
-              value: "3306"
+              value: 3306
             - name: DB_USER
               value: opstree
             - name: DB_PASSWORD
@@ -125,4 +125,4 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 30081  
+      nodePort: 30081
