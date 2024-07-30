@@ -2,10 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: default-backend-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: "*"
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
