@@ -1,18 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: maven-app-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: ingress-wildcard-host
 spec:
-  ingressClassName: nginx
   rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: maven-app
-                port:
-                  number: 8080
+  - host: "foo.bar.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/bar"
+        backend:
+          service:
+            name: maven-app
+            port:
+              number: 8080
