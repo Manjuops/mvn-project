@@ -1,4 +1,4 @@
-name: Java Spring Boot CI/CD
+name: Maven and DB CI/CD
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main  # Trigger on pushes to main branch
 
 jobs:
-  ci:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,24 +18,29 @@ jobs:
         with:
           java-version: '11'
 
-      - name: Build with Maven
+      - name: Build Maven project
         run: mvn -B package --file pom.xml
 
       - name: Docker Login to ACR
         uses: azure/docker-login@v1
         with:
-          login-server: <your-acr-name>.azurecr.io
+          login-server: mrepo.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Build Docker image
+      - name: Build and push Maven Docker image
         run: |
-          docker build . -t <your-acr-name>.azurecr.io/my-java-app:${{ github.sha }}
-          docker push <your-acr-name>.azurecr.io/my-java-app:${{ github.sha }}
+          docker build . -t mrepo.azurecr.io/maven:v1
+          docker push mrepo.azurecr.io/maven:v1
 
-  cd:
+      - name: Build and push DB Docker image
+        run: |
+          docker build -f Dockerfile -t mrepo.azurecr.io/db:v2 Dockerfile
+          docker push mrepo.azurecr.io/db:v2
+
+  deploy-to-aks:
     runs-on: ubuntu-latest
-    needs: ci  # Ensure CI job completes successfully before starting CD job
+    needs: build-and-push  # Ensure build-and-push job completes successfully before starting deploy-to-aks job
 
     steps:
       - name: Azure Login
@@ -44,9 +49,12 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Get AKS credentials
-        run: az aks get-credentials --resource-group <your-resource-group> --name <your-aks-cluster>
+        run: az aks get-credentials --resource-group m --name Gcluster
 
-      - name: Update Kubernetes deployment
+      - name: Update Maven deployment in AKS
         run: |
-          kubectl set image deployment/<your-deployment-name> <container-name>=<your-acr-name>.azurecr.io/my-java-app:${{ github.sha }}
+          kubectl set image deployment/maven-deployment maven=mrepo.azurecr.io/maven:v1
 
+      - name: Update DB deployment in AKS
+        run: |
+          kubectl set image deployment/db-deployment db=mrepo.azurecr.io/db:v2
