@@ -38,8 +38,8 @@ jobs:
 
       - name: Build and push Maven Docker image
         run: |
-          docker build . -t mrepo.azurecr.io/maven:v1
-          docker push mrepo.azurecr.io/maven:v1
+          docker build . -t mrepo.azurecr.io/mymvn:v1
+          docker push mrepo.azurecr.io/mymvn:v1
 
       - name: Build and push DB Docker image
         run: |
@@ -63,7 +63,7 @@ jobs:
 
       - name: Update Maven deployment in AKS
         run: |
-          kubectl set image deployment/maven-app mymvn=mrepo.azurecr.io/maven:v1
+          kubectl set image deployment/maven-app mymvn=mrepo.azurecr.io/mymvn:v1
 
       - name: Update DB deployment in AKS
         run: |
