@@ -43,7 +43,7 @@ jobs:
 
       - name: Build and push DB Docker image
         run: |
-          docker build -f /home/opstree/mvn-project/Dockerfile.mysql -t mrepo.azurecr.io/db:v2 /home/opstree/mvn-project/
+          docker build -f /home/opstree/mvn-project/Dockerfile.mysql -t mrepo.azurecr.io/db:v2 /home/opstree/mvn-project
           docker push mrepo.azurecr.io/db:v2
 
   deploy-to-aks:
