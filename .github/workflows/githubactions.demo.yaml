@@ -52,9 +52,11 @@ jobs:
 
     steps:
       - name: Azure Login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          allow-no-subscriptions: true
+          enable-AzPSSession: true
 
       - name: Get AKS credentials
         run: az aks get-credentials --resource-group m --name Gcluster
