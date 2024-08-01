@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: db
-          image: mrepo.azurecr.io/db:latest
+          image: mrepo.azurecr.io/db:v2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3306
@@ -87,7 +87,7 @@ spec:
     spec:
       containers:
         - name: mymvn
-          image: mrepo.azurecr.io/mymvn:latest
+          image: mrepo.azurecr.io/mymvn:v1
           ports:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent
