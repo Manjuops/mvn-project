@@ -16,7 +16,15 @@ jobs:
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
+          java-version: '11'        # Specifies the Java version to install
+          distribution: 'adopt'     # Specifies the distribution of Java (e.g., adopt, openjdk, zulu)
+          java-package: 'jdk'       # Specifies the Java package to install
+          architecture: 'x64'       # Specifies the architecture (x64 or x86)
+          server-id: 'github'       # Specifies the server ID (e.g., github)
+          server-username: ${{ github.actor }}   # Use GITHUB_ACTOR as server username
+          server-password: ${{ github.token }}   # Use GITHUB_TOKEN as server password
+          overwrite-settings: true  # Overwrite existing settings.xml (if any)
+          job-status: 'success'  
 
       - name: Build Maven project
         run: mvn -B package --file pom.xml
