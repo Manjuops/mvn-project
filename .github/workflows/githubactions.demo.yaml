@@ -63,8 +63,9 @@ jobs:
 
       - name: Update Maven deployment in AKS
         run: |
-          kubectl set image deployment/maven-deployment maven=mrepo.azurecr.io/maven:v1
+          kubectl set image deployment/maven-app mymvn=mrepo.azurecr.io/maven:v1
 
       - name: Update DB deployment in AKS
         run: |
-          kubectl set image deployment/db-deployment db=mrepo.azurecr.io/db:v2
+          kubectl set image statefulset/mysql-db db=mrepo.azurecr.io/db:v2
+
