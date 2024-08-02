@@ -6,7 +6,7 @@ metadata:
   labels:
     app: mysql-db
 spec:
-  serviceName: mysql-db
+  serviceName: "mysql-db"
   replicas: 1
   selector:
     matchLabels:
@@ -36,8 +36,12 @@ spec:
             requests:
               cpu: 250m
               memory: 512Mi
-    volumes: [] 
-volumeClaimTemplates:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+      imagePullSecrets:
+        - name: msecret
+  volumeClaimTemplates:
     - metadata:
         name: mysql-storage
       spec:
@@ -46,11 +50,6 @@ volumeClaimTemplates:
         resources:
           requests:
             storage: 10Gi
-            limits:
-              cpu: 500m
-              memory: 1Gi
-      imagePullSecrets:
-        - name: msecret
 
 ---
 apiVersion: v1
