@@ -19,6 +19,9 @@ spec:
       containers:
         - name: db
           image: mrepo.azurecr.io/db:v2
+          volumeMounts:
+        - name: my-persistent-storage
+          mountPath: /var/lib/mysql
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3306
