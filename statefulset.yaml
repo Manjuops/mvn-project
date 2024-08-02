@@ -6,7 +6,7 @@ metadata:
   labels:
     app: mysql-db
 spec:
-  serviceName: mysql-db
+  serviceName: "mysql-db"
   replicas: 1
   selector:
     matchLabels:
@@ -29,9 +29,6 @@ spec:
               value: opstree
             - name: MYSQL_PASSWORD
               value: opstree123
-          volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: mysql-storage
           resources:
             requests:
               cpu: 250m
@@ -41,15 +38,6 @@ spec:
               memory: 1Gi
       imagePullSecrets:
         - name: msecret
-  volumeClaimTemplates:
-    - metadata:
-        name: mysql-storage
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 10Gi
 
 ---
 apiVersion: v1
