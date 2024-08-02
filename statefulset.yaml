@@ -29,15 +29,15 @@ spec:
               value: opstree
             - name: MYSQL_PASSWORD
               value: opstree123
-       volumeMounts:
+          volumeMounts:
             - mountPath: /var/lib/mysql
               name: mysql-storage
           resources:
             requests:
               cpu: 250m
               memory: 512Mi
-      volumes: [] 
-  volumeClaimTemplates:
+    volumes: [] 
+volumeClaimTemplates:
     - metadata:
         name: mysql-storage
       spec:
