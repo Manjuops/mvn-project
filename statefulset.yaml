@@ -19,13 +19,6 @@ spec:
       containers:
         - name: db
           image: mrepo.azurecr.io/db:v2
-          volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: mysql-storage
-      volumes:
-        - name: mysql-storage
-          persistentVolumeClaim:
-            claimName: mysql-pvc
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3306
@@ -36,10 +29,24 @@ spec:
               value: opstree
             - name: MYSQL_PASSWORD
               value: opstree123
+       volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-storage
           resources:
             requests:
               cpu: 250m
               memory: 512Mi
+      volumes: [] 
+
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-storage
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
             limits:
               cpu: 500m
               memory: 1Gi
