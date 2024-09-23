@@ -36,8 +36,6 @@ spec:
             limits:
               cpu: 500m
               memory: 1Gi
-      imagePullSecrets:
-        - name: msecret
 
 ---
 apiVersion: v1
